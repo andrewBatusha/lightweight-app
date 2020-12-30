@@ -17,6 +17,7 @@ object Dependencies {
   val catsVersion           = "1.0.1"
   val bCryptScalaVersion    = "3.1"
   val jwtScalaVersion       = "0.14.1"
+  val corsVersion           = "0.1.11"
 
   val scalaTestVersion  = "3.0.5"
   val scalacheckVersion = "1.13.5"
@@ -42,7 +43,7 @@ object Dependencies {
     "com.github.tminglei"      %% "slick-pg_jts"         % slickPgVersion,
     "com.github.t3hnar"        %% "scala-bcrypt"         % bCryptScalaVersion,
     "com.pauldijou"            %% "jwt-core"             % jwtScalaVersion,
-    "ch.megard"                %% "akka-http-cors"       % "1.1.1"
+    "ch.megard"                %% "akka-http-cors"       % corsVersion
   )
 
   val test = Seq(
