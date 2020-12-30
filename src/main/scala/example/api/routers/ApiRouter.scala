@@ -1,10 +1,12 @@
 package example.api.routers
 
-import akka.http.scaladsl.model.headers._
+import akka.http.scaladsl.model.HttpMethods
 import ch.megard.akka.http.cors.CorsDirectives._
 import ch.megard.akka.http.cors.CorsSettings
 import example.api.protocol.ApiResponse
 import example.services.{AccountService, AuthService, BeverageService, ReviewService}
+
+import scala.collection.immutable.{Seq => ISeq}
 
 class ApiRouter(
     accountService:  AccountService,
@@ -18,10 +20,9 @@ class ApiRouter(
   val beverageApiRouter = new BeverageApiRouter(beverageService)
   val reviewApiRoute    = new ReviewApiRoute(reviewService)
 
-  val corsSettings = CorsSettings.defaultSettings.copy(
-    allowGenericHttpRequests = true,
-    allowedOrigins = HttpOriginRange.*
-  )
+  val corsAllowedMethods = ISeq(HttpMethods.GET, HttpMethods.POST, HttpMethods.PUT, HttpMethods.DELETE,
+    HttpMethods.HEAD, HttpMethods.OPTIONS, HttpMethods.PATCH)
+  val corsSettings = CorsSettings.defaultSettings.copy(allowedMethods = corsAllowedMethods)
   import example.api.protocol.ApiJsonProtocol._
 
   // format: OFF
